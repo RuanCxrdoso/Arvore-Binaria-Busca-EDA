@@ -18,7 +18,7 @@ class Pilha():
        self.topo -= 1
        return chave
     else:
-       print('Pilha vazia !')
+       print('|')
 
   # def __str__(self):
   #       return "[" + ", ".join(map(str, self.pilha)) + "]"
