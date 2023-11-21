@@ -1,22 +1,25 @@
+from noPilha import No
+
 class Pilha():
   def __init__(self):
-    self.pilha = [0] * 1000
-    self.max = 1000
-    self.topo = -1
+    # self.pilha = [0] * 1000
+    # self.max = 1000
+    self.topo = None
 
   def empilhar(self, chave):
-    if self.topo < self.max:
-      self.topo += 1
-      self.pilha[self.topo] = chave
+    novo = No()
+    novo.valor = chave
+    if self.topo == None:
+      self.topo = novo
     else:
-       print('Pilha cheia !')
+      novo.prox = self.topo
+      self.topo = novo
 
   def desempilhar(self):
-    chave = 0
-    if self.topo >= 0:
-       chave = self.pilha[self.topo]
-       self.topo -= 1
-       return chave
+    if self.topo != None:
+      aux = self.topo.valor
+      self.topo = self.topo.prox
+      return aux
     else:
        print('|')
 

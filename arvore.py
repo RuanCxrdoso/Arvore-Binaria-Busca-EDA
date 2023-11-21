@@ -1,4 +1,4 @@
-from no import No
+from noArvore import No
 from pilha import Pilha
 
 class Arvore():
@@ -28,21 +28,21 @@ class Arvore():
       novo = No()
       novo.valor = chave
       self.raiz = novo
-      print(f'{novo.valor} foi incluído na raíz !') # somento para verificação no terminal
+      print(f'{novo.valor} foi incluído na raíz !') # somente para verificação no terminal
     else:
       pont = self.raiz
       pont, f = self.busca(pont, chave)
       if f == 1:
-        print(f'A chave --> {chave} <-- já está na árvore !') # somento para verificação no terminal
+        print(f'A chave --> {chave} <-- já está na árvore !') # somente para verificação no terminal
       else:
         novo = No()
         novo.valor = chave
         if f == 2:
           pont.esq = novo
-          print(f'{novo.valor} foi incluído como filho esquerdo !') # somento para verificação no terminal
+          print(f'{novo.valor} foi incluído como filho esquerdo !') # somente para verificação no terminal
         else:
           pont.dir = novo
-          print(f'{novo.valor} foi incluído como filho direito !') # somento para verificação no terminal
+          print(f'{novo.valor} foi incluído como filho direito !') # somente para verificação no terminal
 
   def preOrdem(self):
     pont = self.raiz
@@ -55,3 +55,12 @@ class Arvore():
         pont = pont.esq
       else:
         pont = pilhaPreOrdem.desempilhar()
+
+
+arvore = Arvore()
+arvore.inclusao(25)
+arvore.inclusao(49)
+arvore.inclusao(12)
+arvore.inclusao(15)
+arvore.inclusao(38)
+arvore.preOrdem()
