@@ -22,6 +22,24 @@ class Arvore():
           pont = pont.dir
           pont, f = self.busca(pont, chave)    
     return pont, f    
+
+  def inclusao(self, chave):
+    if self.raiz == None:
+      novo = No()
+      novo.valor = chave
+      self.raiz = novo
+    else:
+      pont = self.raiz
+      pont, f = self.busca(pont, chave)
+      if f == 1:
+        print(f'A chave --> {chave} <-- já está na árvore !')
+      else:
+        novo = No()
+        novo.valor = chave
+        if f == 2:
+          pont.esq = novo
+        else:
+          pont.dir = novo
     pont = self.raiz
     while pont != None:
       print(f'--> {pont.valor}')
