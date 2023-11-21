@@ -40,6 +40,8 @@ class Arvore():
           pont.esq = novo
         else:
           pont.dir = novo
+
+  def preOrdem(self):
     pont = self.raiz
     while pont != None:
       print(f'--> {pont.valor}')
