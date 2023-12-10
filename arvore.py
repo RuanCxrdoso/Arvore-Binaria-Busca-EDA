@@ -119,6 +119,46 @@ class Arvore:
         pont = pilhaPreOrdem.desempilhar()
     print('\n')
 
+  def mostrarArvore(self):
+    raiz = self.raiz
+    def altura(raiz):
+      return 1 + max(altura(raiz.esq), altura(raiz.dir)) if raiz else -1  
+    xNivel = altura(raiz)
+    largura =  pow(2, xNivel+1)
+
+    q = [(raiz, 0, largura, 'c')]
+    niveis=[]
+
+    while(q):
+      no, nivel, x, alinhamento = q.pop(0)
+      if no:            
+        if len(niveis) <= nivel:
+            niveis.append([])
+    
+        niveis[nivel].append([no, nivel, x, alinhamento])
+        seg = largura // (pow(2,nivel+1))
+        q.append((no.esq, nivel+1, x-seg, 'l'))
+        q.append((no.dir, nivel+1, x+seg, 'r'))
+
+    for i, l in enumerate(niveis):
+        pre = 0
+        preLinha = 0
+        strLinha = ''
+        pstr = ''
+        seg = largura // (pow(2,i+1))
+        for n in l:
+            valstr = str(n[0].valor)
+            if n[3] == 'r':
+                strLinha += ' ' * (n[2]-preLinha-1-seg-seg//2) + '¯' * (seg +seg//2) + '\\'
+                preLinha = n[2] 
+            if n[3] == 'l':
+              strLinha += ' ' * (n[2]-preLinha-1) + '/' + '¯' * (seg+seg//2)  
+              preLinha = n[2] + seg + seg // 2
+            pstr += ' ' * (n[2] - pre - len(valstr)) + valstr
+            pre = n[2]
+        print(strLinha)
+        print(pstr)
+  
   def menu(self):
     print('**' * 43)
     print('**' * 15, 'ÁRVORE BINÁRIA DE BUSCA', '**' * 15)
@@ -126,7 +166,7 @@ class Arvore:
     print('\n MENU DE SELEÇÃO:')
     selecao = True
     while selecao:
-        print('1) Inclusão', '\n2) Exclusão', '\n3) Caminhamento Pré-Ordem', '\n4) Estrutura da Árvore', '\n5) Fim')
+        print('\n1) Inclusão', '\n2) Exclusão', '\n3) Caminhamento Pré-Ordem', '\n4) Estrutura da Árvore', '\n5) Fim\n')
         selecao = int(input('-> '))
         if selecao == 1:
           valor = int(input('\nDigite o valor a ser inserido na árvore: '))
@@ -138,8 +178,7 @@ class Arvore:
         elif selecao == 3:
           self.preOrdem()
         elif selecao == 4:
-          # Em desenvolvimento
-          pass
+          self.mostrarArvore()
         elif selecao == 5:
           print('\n-->', 'Programa encerrado !', '<--\n')
           selecao = False
