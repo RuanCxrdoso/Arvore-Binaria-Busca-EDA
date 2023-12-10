@@ -1,9 +1,10 @@
 from noArvore import No
 from pilha import Pilha
 
-class Arvore():
+class Arvore:
   def __init__(self):
     self.raiz = None
+    self.menu()
   
   def busca(self, pont, chave):
     if pont.valor == chave:
@@ -28,7 +29,7 @@ class Arvore():
       novo = No()
       novo.valor = chave
       self.raiz = novo
-      print(f'{novo.valor} foi incluído na raíz !') # somente para verificação no terminal
+      print(f'\n{novo.valor} foi incluído na raíz da árvore!\n') # somente para verificação no terminal
     else:
       pont = self.raiz
       pont, f = self.busca(pont, chave)
@@ -39,10 +40,10 @@ class Arvore():
         novo.valor = chave
         if f == 2:
           pont.esq = novo
-          print(f'{novo.valor} foi incluído como filho esquerdo !') # somente para verificação no terminal
+          print(f'\n{novo.valor} foi incluído como filho esquerdo do seu pai {pont.valor}!\n') # somente para verificação no terminal
         else:
           pont.dir = novo
-          print(f'{novo.valor} foi incluído como filho direito !') # somente para verificação no terminal
+          print(f'\n{novo.valor} foi incluído como filho direito do sei pai {pont.valor} !\n') # somente para verificação no terminal
 
   def buscaExclusao(self, pont, pai, chave, f):
     if pont is None:
@@ -99,14 +100,15 @@ class Arvore():
                         pai.esq = y
                     else:
                         pai.dir = y
-        print(f"O nó com a chave {pont.valor} foi deletado !")
+        print(f"\nO nó com a chave {chave} foi deletado !")
         del pont
     else:
-        print("A chave não foi encontrada !")
+        print(f"\nA chave {chave} não foi encontrada na árvore!")
 
   def preOrdem(self):
     pont = self.raiz
     pilhaPreOrdem = Pilha()
+    print('\nCaminhamento Pré-Ordem:')
     while pont != None:
       print(f'-> {pont.valor}', end=' ')
       if pont.dir != None:
@@ -115,8 +117,36 @@ class Arvore():
         pont = pont.esq
       else:
         pont = pilhaPreOrdem.desempilhar()
+    print('\n')
 
-# arvore = Arvore()
+  def menu(self):
+    print('**' * 43)
+    print('**' * 15, 'ÁRVORE BINÁRIA DE BUSCA', '**' * 15)
+    print('**' * 43)
+    print('\n MENU DE SELEÇÃO:')
+    selecao = True
+    while selecao:
+        print('1) Inclusão', '\n2) Exclusão', '\n3) Caminhamento Pré-Ordem', '\n4) Estrutura da Árvore', '\n5) Fim')
+        selecao = int(input('-> '))
+        if selecao == 1:
+          valor = int(input('\nDigite o valor a ser inserido na árvore: '))
+          self.inclusao(valor)
+        elif selecao == 2:
+          valor = int(input('\nDigite o valor a ser excluído da árvore: '))
+          self.exclusao(valor)
+          print('\n')
+        elif selecao == 3:
+          self.preOrdem()
+        elif selecao == 4:
+          # Em desenvolvimento
+          pass
+        elif selecao == 5:
+          print('\n-->', 'Programa encerrado !', '<--\n')
+          selecao = False
+        else:
+          print('\n-->', 'Opção inválida !', '<--\n')
+
+arvore = Arvore()
 # arvore.inclusao(25)
 # arvore.inclusao(49)
 # arvore.inclusao(5)
