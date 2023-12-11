@@ -4,9 +4,9 @@ from pilha import Pilha
 class Arvore:
   def __init__(self):
     self.raiz = None
-    self.menu()
+    self._menu()
   
-  def busca(self, pont, chave):
+  def _buscaInclusao(self, pont, chave):
     if pont.valor == chave:
       f = 1
     else:
@@ -15,13 +15,13 @@ class Arvore:
           f = 2
         else:
           pont = pont.esq
-          pont, f = self.busca(pont, chave)
+          pont, f = self._buscaInclusao(pont, chave)
       else:
         if pont.dir == None:
           f = 3
         else:
           pont = pont.dir
-          pont, f = self.busca(pont, chave)    
+          pont, f = self._buscaInclusao(pont, chave)    
     return pont, f    
 
   def inclusao(self, chave):
@@ -32,7 +32,7 @@ class Arvore:
       print(f'\n{novo.valor} foi incluído na raíz da árvore!\n') # somente para verificação no terminal
     else:
       pont = self.raiz
-      pont, f = self.busca(pont, chave)
+      pont, f = self._buscaInclusao(pont, chave)
       if f == 1:
         print(f'A chave --> {chave} <-- já está na árvore !') # somente para verificação no terminal
       else:
@@ -45,7 +45,7 @@ class Arvore:
           pont.dir = novo
           print(f'\n{novo.valor} foi incluído como filho direito do sei pai {pont.valor} !\n') # somente para verificação no terminal
 
-  def buscaExclusao(self, pont, pai, chave, f):
+  def _buscaExclusao(self, pont, pai, chave, f):
     if pont is None:
         f = 0
     else:
@@ -54,16 +54,16 @@ class Arvore:
         else:
             if chave < pont.valor:
                 pai = pont
-                pont, pai, f = self.buscaExclusao(pont.esq, pai, chave, f)
+                pont, pai, f = self._buscaExclusao(pont.esq, pai, chave, f)
             else:
                 pai = pont
-                pont, pai, f = self.buscaExclusao(pont.dir, pai, chave, f)
+                pont, pai, f = self._buscaExclusao(pont.dir, pai, chave, f)
 
     return pont, pai, f
 
   def exclusao(self, chave):
     f = None
-    pont, pai, f = self.buscaExclusao(self.raiz, None, chave, f)
+    pont, pai, f = self._buscaExclusao(self.raiz, None, chave, f)
     if pont is not None:
         if pont.esq is None:
             if pont == self.raiz:
@@ -108,7 +108,7 @@ class Arvore:
   def preOrdem(self):
     pont = self.raiz
     pilhaPreOrdem = Pilha()
-    print('\nCaminhamento Pré-Ordem:')
+    print('\nCaminhamento Pré-Ordem:\n')
     while pont != None:
       print(f'-> {pont.valor}', end=' ')
       if pont.dir != None:
@@ -139,7 +139,7 @@ class Arvore:
         seg = largura // (pow(2,nivel+1))
         q.append((no.esq, nivel+1, x-seg, 'l'))
         q.append((no.dir, nivel+1, x+seg, 'r'))
-
+    print('\nEstrutura da Árvore:\n')
     for i, l in enumerate(niveis):
         pre = 0
         preLinha = 0
@@ -159,13 +159,13 @@ class Arvore:
         print(strLinha)
         print(pstr)
   
-  def menu(self):
+  def _menu(self):
     print('**' * 43)
     print('**' * 15, 'ÁRVORE BINÁRIA DE BUSCA', '**' * 15)
     print('**' * 43)
-    print('\n MENU DE SELEÇÃO:')
     selecao = True
     while selecao:
+        print('\n MENU DE SELEÇÃO:')
         print('\n1) Inclusão', '\n2) Exclusão', '\n3) Caminhamento Pré-Ordem', '\n4) Estrutura da Árvore', '\n5) Fim\n')
         selecao = int(input('-> '))
         if selecao == 1:
@@ -186,15 +186,3 @@ class Arvore:
           print('\n-->', 'Opção inválida !', '<--\n')
 
 arvore = Arvore()
-# arvore.inclusao(25)
-# arvore.inclusao(49)
-# arvore.inclusao(5)
-# arvore.inclusao(32)
-# arvore.inclusao(41)
-# arvore.inclusao(78)
-# arvore.inclusao(2)
-# arvore.inclusao(4)
-# arvore.inclusao(25)
-# arvore.preOrdem()
-# arvore.exclusao(100)
-# arvore.preOrdem()
