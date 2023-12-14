@@ -29,21 +29,21 @@ class Arvore:
       novo = No()
       novo.valor = chave
       self.raiz = novo
-      print(f'\n{novo.valor} foi incluído na raíz da árvore!\n') # somente para verificação no terminal
+      print(f'\n{novo.valor} foi incluído na raíz da árvore!\n')
     else:
       pont = self.raiz
       pont, f = self._buscaInclusao(pont, chave)
       if f == 1:
-        print(f'A chave --> {chave} <-- já está na árvore !') # somente para verificação no terminal
+        print(f'A chave --> {chave} <-- já está na árvore !')
       else:
         novo = No()
         novo.valor = chave
         if f == 2:
           pont.esq = novo
-          print(f'\n{novo.valor} foi incluído como filho esquerdo do seu pai {pont.valor}!\n') # somente para verificação no terminal
+          print(f'\n{novo.valor} foi incluído como filho esquerdo do seu pai {pont.valor}!\n')
         else:
           pont.dir = novo
-          print(f'\n{novo.valor} foi incluído como filho direito do sei pai {pont.valor} !\n') # somente para verificação no terminal
+          print(f'\n{novo.valor} foi incluído como filho direito do sei pai {pont.valor} !\n')
 
   def _buscaExclusao(self, pont, pai, chave, f):
     if pont is None:
@@ -167,19 +167,19 @@ class Arvore:
     while selecao:
         print('\n MENU DE SELEÇÃO:')
         print('\n1) Inclusão', '\n2) Exclusão', '\n3) Caminhamento Pré-Ordem', '\n4) Estrutura da Árvore', '\n5) Fim\n')
-        selecao = int(input('-> '))
-        if selecao == 1:
+        menu = int(input('-> '))
+        if menu == 1:
           valor = int(input('\nDigite o valor a ser inserido na árvore: '))
           self.inclusao(valor)
-        elif selecao == 2:
+        elif menu == 2:
           valor = int(input('\nDigite o valor a ser excluído da árvore: '))
           self.exclusao(valor)
           print('\n')
-        elif selecao == 3:
+        elif menu == 3:
           self.preOrdem()
-        elif selecao == 4:
+        elif menu == 4:
           self.mostrarArvore()
-        elif selecao == 5:
+        elif menu == 5:
           print('\n-->', 'Programa encerrado !', '<--\n')
           selecao = False
         else:
