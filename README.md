@@ -1,7 +1,10 @@
-# Next Level Week - Inteligência Artificial
+# Árvore Binária de Busca 🎄
 
-![Project Logo](./public/preview1.jpg)
-# Resumindo Shorts com Inteligência Artificial 🔊
+<p align="center">
+  <img src="./public/preview1.jpg" alt="Project Logo">
+</p>
+
+# Árvore Binária de Busca + Python 🌳
 
 > ## Descrição 📚
 Este projeto é desenvolvido na trilha Foundations na edição NLW IA. A aplicação denominada Shorts Summary é um aplicativo concebido para processar links de Shorts do YouTube, efetuando a transcrição automática do áudio para texto. Posteriormente, fornece ao usuário um resumo textual do conteúdo. O processo integral é conduzido por meio de inteligência artificial, com destaque para a utilização da tecnologia Whisper da OpenAI, empregada no processo de transcrição automática.
